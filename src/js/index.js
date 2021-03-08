@@ -9,7 +9,7 @@ import "bootstrap";
 import "../styles/index.scss";
 
 //import your own components
-import { Todo } from "./component/home.js";
+import { Todo } from "./component/Todo.js";
 
 //render your react application
 ReactDOM.render(<Todo />, document.querySelector("#app"));
