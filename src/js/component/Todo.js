@@ -2,14 +2,21 @@ import React, { useState } from "react";
 
 function Todo() {
 	const [task, setTask] = useState("");
-	const [listTask, setListTask] = useState("");
+	const [listTask, setListTask] = useState([]);
 
 	const putTask = () => {
 		if (task != "") {
 			setListTask([...listTask, task]);
+			setTask("");
+		} else {
+			alert("Por favor ingrese tarea antes de confirmar");
 		}
 	};
-	//delete task
+
+	const deleteTask = indexDelete => {
+		let resultado = listTask.filter((task, index) => index != indexDelete);
+		setListTask(resultado);
+	};
 
 	return (
 		<div className="container">
@@ -19,10 +26,11 @@ function Todo() {
 					<input
 						type="text"
 						className="form-control"
-						placeholder="add new tasl"
+						placeholder="add new task"
 						onChange={e => {
 							setTask(e.target.value);
 						}}
+						value={task}
 					/>
 					<div className="input-group-append">
 						<button
@@ -33,17 +41,29 @@ function Todo() {
 						</button>
 					</div>
 				</div>
-				<ul className="List-group">
+				<ul className="list-group">
 					{listTask.map((item, index) => {
 						return (
-							<li key={index} className="List-group-item">
+							<li key={index} className="list-group-item">
 								{item}
+								<button
+									onClick={() => {
+										deleteTask(index);
+									}}
+									type="button"
+									className="btn btn-secondary">
+									x
+								</button>
 							</li>
 						);
 					})}
 				</ul>
-				<small className="text-muted">Mucho por hacer</small>
+				<small className="text-muted">
+					{listTask.length} tareas por hacer
+				</small>
 			</div>
 		</div>
 	);
 }
+
+export default Todo;
