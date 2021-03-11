@@ -8,3 +8,10 @@ body{
 .todo-box {
     background-color: white;
 }
+.list-group-item .btn-secondary {
+    display: none;
+}
+
+.list-group-item:hover .btn-secondary {
+    display: inline-block;
+}
